@@ -1,0 +1,7 @@
+{
+  "name": "News Api",
+  "version": "1.0.0",
+  "description": "News Api documentation",
+  "title": "News Api - test #2",
+  "url" : "http://127.0.0.1:8000/api/v1"
+}
