@@ -14,6 +14,18 @@ class ArticlesView(generics.ListAPIView):
     queryset = Articles.objects.all()
     pagination_class = PageNumberPagination
 
+    def get_queryset(self):
+        category_id = self.request.query_params.get('category_id', None)
+        if category_id:
+            try:
+                category = int(category_id)
+            except ValueError:
+                raise ValidationError({'category_id': ['Invalid value type.']})
+            else:
+                return self.queryset.filter(category_id=category).order_by('id')
+
+        return self.queryset.order_by('id')
+
     """
     @api {get} /news/articles Articles
     @apiVersion 1.0.0
@@ -22,16 +34,7 @@ class ArticlesView(generics.ListAPIView):
     """
 
     def get(self, request, *args, **kwargs):
-        category_id = self.request.query_params.get('category_id', None)
-        if category_id:
-            try:
-                category = int(category_id)
-            except ValueError:
-                raise ValidationError({'category_id': ['Invalid value type.']})
-            else:
-                self.queryset = self.queryset.filter(category_id=category)
-
-        queryset = self.filter_queryset(self.get_queryset().order_by('id'))
+        queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
