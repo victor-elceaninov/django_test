@@ -15,6 +15,7 @@ class ArticlesView(generics.ListAPIView):
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
+        queryset = Articles.objects.all()
         category_id = self.request.query_params.get('category_id', None)
         if category_id:
             try:
@@ -22,9 +23,9 @@ class ArticlesView(generics.ListAPIView):
             except ValueError:
                 raise ValidationError({'category_id': ['Invalid value type.']})
             else:
-                return self.queryset.filter(category_id=category).order_by('id')
+                queryset = queryset.filter(category_id=category)
 
-        return self.queryset.order_by('id')
+        return queryset.order_by('id')
 
     """
     @api {get} /news/articles Articles
