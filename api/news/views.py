@@ -45,7 +45,7 @@ class ArticlesView(generics.ListAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class ArticleDetailView(generics.ListAPIView):
+class ArticleDetailView(generics.RetrieveAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Articles.objects.all()
     serializer_class = ArticleSerializer
