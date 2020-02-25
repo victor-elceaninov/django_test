@@ -13,5 +13,5 @@ urlpatterns = [
     re_path('api/(?P<version>(v1|v2))/auth/register/', RegisterView.as_view(), name='register'),
     re_path('api/(?P<version>(v1|v2))/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     re_path('api/(?P<version>(v1|v2))/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    re_path('api/(?P<version>(v1|v2))/', include('news.urls')),
+    re_path('api/(?P<version>(v1|v2))/', include('news.urls', namespace='news')),
 ]

@@ -19,5 +19,5 @@
 *     }
 *
 * @apiError {401} Unauthorized Authentication required.
-* @apiDescription Like/Unlike will be determined based on whether the article was liked or not. For more info about was specific article liked or not you can access `Article` and `Articles` endpoints (`is_liked` param).
+* @apiDescription Like/Unlike will be determined depending on whether the current user liked the article before or not (the is_liked parameter).
 **/
