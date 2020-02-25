@@ -25,7 +25,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return get_url('article-detail', self.context, obj.id)
 
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     total = serializers.SerializerMethodField(read_only=True)
     link = serializers.SerializerMethodField(read_only=True)
     articles = serializers.SerializerMethodField(read_only=True)
